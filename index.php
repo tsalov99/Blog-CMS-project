@@ -34,4 +34,6 @@ if (mysqli_num_rows($allPosts) > 0) {
     echo "</table>";
     
     include('pagesNavigation.php');
+    } else {
+        echo "<p class='h1 text-center'>You have no posts yet!</p>";
     }
