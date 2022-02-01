@@ -14,7 +14,10 @@ $start = ($page - 1) * $perPage;
 $selectPosts = "SELECT * FROM posts";
 $getPostsForPages = "SELECT * FROM posts LIMIT $start, $perPage";
 $allPosts = mysqli_query($connection, $selectPosts);
-$pagesNumber = mysqli_query($connection, $getPostsForPages);
+
+if (mysqli_num_rows($allPosts) !== 0) {
+    $pagesNumber = mysqli_query($connection, $getPostsForPages);
+}
 $totalPages = ceil(mysqli_num_rows($allPosts) / $perPage);
 
 $page !== 1 && $page > 1 ? $prevousPage = $page - 1 : $prevousPage = 1;

@@ -27,4 +27,4 @@ if (isset($modified)) {
 
 /* Get 20 posts per page query */
 
-$getPostsForPages = "SELECT * FROM posts LIMIT $start, $perPage";
+//$getPostsForPages = "SELECT * FROM posts LIMIT $start, $perPage";
