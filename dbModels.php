@@ -1,30 +1,28 @@
 <?php
 
 require('config.php');
-//$title = $_POST['title'];
-//$short_description = $_POST["short_description"];
-//$content = $_POST['content'];
-//$slug = $_POST['slug'];
-//$created = date('Y-m-d H:m:s', strtotime($_POST['created']));
-//$active = settype($_POST['active'], "integer");
 
+/* Add post statement */
 
-/* Add post query */
-$addPost = "INSERT INTO posts (title, content, short_description, slug, created, active)
-VALUES ('$title', '$content', '$short_description', '$slug', '$created', $active)";
+$addPostStmt = mysqli_stmt_init($connection);
+$addPostStmt->prepare("INSERT INTO posts (title, content, short_description, slug, created, active) VALUES (?,?,?,?,?,?)");
 
 /* Select posts query */
 
-$selectPosts = "SELECT * FROM posts";
-
-/* Edit post query */
-if (isset($modified)) {
-    $updatePost = "UPDATE posts 
-    SET title = '$title', content = '$content', short_description = '$short_description', slug = '$slug', created = '$created', modified = '$modified', active = $active
-    WHERE id = $id";
-}
+$selectAllPostsQuery = "SELECT * FROM `posts`";
 
 
-/* Get 20 posts per page query */
+/* Get posts for pages statement */
 
-//$getPostsForPages = "SELECT * FROM posts LIMIT $start, $perPage";
+$getPostsForPagesStmt = mysqli_stmt_init($connection);
+$getPostsForPagesStmt->prepare("SELECT * FROM posts LIMIT ?,?");
+
+/* Get post for edit statement */
+
+$getPostForEditStmt = mysqli_stmt_init($connection);
+$getPostForEditStmt->prepare("SELECT * FROM posts WHERE id = ?");
+
+/* Update edited post statement */
+
+$updatePostStmt = mysqli_stmt_init($connection);
+$updatePostStmt->prepare("UPDATE posts SET title = ?, content = ?, short_description = ?, slug = ?, created = ?, modified = ?, active = ? WHERE id = ?");

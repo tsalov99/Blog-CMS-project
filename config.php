@@ -1,20 +1,29 @@
-<?php   
-[$server, $username, $password, $db] = ['localhost', 'root', '', 'blogcms']; //set host/ username/ password/ the name of database you want to create
+<?php
+[$server, $username, $password] = ['localhost', 'root', '']; //set host/ username/ password/ db-name
 
-$connection = mysqli_connect($server, $username, $password);
+$connection = new mysqli($server, $username, $password);
 
-if (!$connection) {
-    die('Failed to connect, erorr: ' . mysqli_connect_error());
-}
-$dbCreate = "CREATE DATABASE IF NOT EXISTS $db";
-if (mysqli_query($connection, $dbCreate)) {
-    $connection = mysqli_connect($server, $username, $password, $db);
-} else {
+if ($connection->connect_errno) {
+    die('Failed to connect, erorr: ' . $connection->connect_error);
 }
 
+if (!$connection->query("CREATE DATABASE IF NOT EXISTS `blog-cms-project` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci")) {
+    echo "DATABASE WAS NOT CREATED";
+}
 
-$tableCreate = "CREATE TABLE if not exists posts (id INT NOT NULL, title VARCHAR(80) NOT NULL, content TEXT NOT NULL, short_description VARCHAR(150), slug VARCHAR(80) NOT NULL, created DATETIME NOT NULL, modified DATETIME, active BIT, PRIMARY KEY (id))";
-mysqli_query($connection, $tableCreate);
-    
-//if (mysqli_query($connection, $dbCreate)) {echo "Database created";}
-//if (mysqli_query($connection, $tableCreate)) {echo "Table created:";}
+$connection->select_db('blog-cms-project');
+
+$postsTableQuery = "CREATE TABLE IF NOT EXISTS `posts` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `title` varchar(80) NOT NULL,
+    `content` text NOT NULL,
+    `short_description` varchar(150) DEFAULT NULL,
+    `slug` varchar(80) NOT NULL,
+    `created` datetime NOT NULL,
+    `modified` datetime DEFAULT NULL,
+    `active` bit(1) DEFAULT NULL,
+    PRIMARY KEY (`id`))";
+
+if (!$connection->query($postsTableQuery)) {
+    echo "TABLE WAS NOT CREATED";
+}

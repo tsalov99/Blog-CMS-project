@@ -1,13 +1,18 @@
 <?php
 require('config.php');
+require('dbModels.php');
 require('style\header.php');
 require('style\navigation.php');
 
 $id = $_GET['id'];
-$selectPostEdit = "SELECT * FROM posts WHERE id = $id";
-$result = mysqli_fetch_array(mysqli_query($connection, $selectPostEdit));
-//print_r($result);
-$created = date('Y-m-d\TH:m:s', strtotime($result['created']));
+
+$getPostForEditStmt->bind_param("i", $id);
+$getPostForEditStmt->execute();
+$result = mysqli_stmt_get_result($getPostForEditStmt);
+$result = $result->fetch_array();
+
+$created = date('Y-m-d H:m:s', strtotime($result['created']));
+
 echo "<div class='text-left p-5 h6'>";
 ?>
 
