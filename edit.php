@@ -19,7 +19,7 @@ echo "<div class='text-left p-5 h6'>";
 <form action="editPostCheck.php?id=<?php echo $id ;?>" method="post">
 
     <label">Title</label>
-    <input type="text" name="title" value="<?php echo $result['title']; ?>">
+    <input type="text" name="title" value='<?php echo $result['title']; ?>'>
     <?php if (isset($titleError)) { echo "<p>$titleError</p>"; } ?> <br />
 
     <label>Short description</label>

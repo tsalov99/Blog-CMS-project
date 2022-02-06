@@ -1,11 +1,14 @@
 <?php
 require('config.php');
-require('style\header.php');
-require('style\navigation.php');
-$id = $_GET['id'];
-$delete = "DELETE FROM posts WHERE id=$id";
-$result = mysqli_query($connection, $delete);
+require('dbModels.php');
+require('style/header.php');
+require('style/navigation.php');
 
-if ($result) {
+$id = $_GET['id'];
+
+$deletePostStmt->bind_param("i", $id);
+$deletePostStmt->execute();
+
+if ($deletePostStmt) {
     echo ("Deleted");
 }
