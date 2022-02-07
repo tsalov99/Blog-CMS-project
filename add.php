@@ -19,7 +19,7 @@ require('style\navigation.php');
     <?php if(isset($short_description_error)) {echo "<p class='error'>$short_description_error<p>";} ?> <br>
 
     <label>Content</label>
-    <textarea name="content" id="text" value="<?php echo $content; ?>"></textarea>
+    <textarea name="content" id="tiny" value="<?php echo $content; ?>"></textarea>
     <?php if (isset($contentError)) { echo "<p class='error'>$contentError</p>"; } ?> <br>
 
     <label>Slug</label>
