@@ -25,6 +25,8 @@ if($result) {
     
     echo "<p class='h3'>Last change: $singlePost[modified]</p>";
     
+    echo "<p class='h3'>Image: $singlePost[imgPath]</p>";
+
     echo "<p class='h3'>Active: $active</p>";
 
     echo "<a href=edit.php?id=$id><p>Edit post</p></a>";

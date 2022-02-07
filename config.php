@@ -1,5 +1,5 @@
 <?php
-[$server, $username, $password] = ['localhost', 'root', '']; //set host/ username/ password/ db-name
+[$server, $username, $password] = ['localhost', 'root', 'S1L0V']; //set host/ username/ password/ db-name
 
 $connection = new mysqli($server, $username, $password);
 
@@ -25,5 +25,16 @@ $postsTableQuery = "CREATE TABLE IF NOT EXISTS `posts` (
     PRIMARY KEY (`id`))";
 
 if (!$connection->query($postsTableQuery)) {
-    echo "TABLE WAS NOT CREATED";
+    echo "TABLE posts WAS NOT CREATED";
 }
+
+$imagesTableQuery = "CREATE TABLE IF NOT EXISTS `images` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `path` varchar(50) NOT NULL,
+    `parent_post_id` int(11) NOT NULL,
+    PRIMARY KEY (`id`))
+    ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;";
+
+    if(!$connection->query($imagesTableQuery)) {
+        echo "Table images was not created";
+    }

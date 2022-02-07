@@ -27,7 +27,7 @@ echo "<div class='text-left p-5 h6'>";
     <?php if(isset($short_description_error)) {echo "<p>$short_description_error<p>";} ?> <br />
 
     <label>Content</label>
-    <input type="text" name="content" value="<?php echo $result['content']; ?>">
+    <textarea name="content" value="<?php echo $result['content']; ?>"> </textarea>
     <?php if (isset($contentError)) { echo "<p>$contentError</p>"; } ?> <br />
 
     <label>Slug</label>

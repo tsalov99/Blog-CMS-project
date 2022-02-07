@@ -8,9 +8,9 @@ require('style\header.php');
 require('style\navigation.php');
 ?>
 
-<form action="addPostCheck.php" method="post">
-<div class='form-group'>
-    <label">Title</label>
+<form action="addPostCheck.php" method="post" enctype="multipart/form-data">
+<div class="form-group">
+    <label>Title</label>
     <input  type="text" name="title" value="<?php echo $title; ?>">
     <?php if (isset($titleError)) { echo "<p class='error'>$titleError</p>"; } ?> <br>
 
@@ -19,7 +19,7 @@ require('style\navigation.php');
     <?php if(isset($short_description_error)) {echo "<p class='error'>$short_description_error<p>";} ?> <br>
 
     <label>Content</label>
-    <input type="text" name="content" value="<?php echo $content; ?>">
+    <textarea name="content" id="text" value="<?php echo $content; ?>"></textarea>
     <?php if (isset($contentError)) { echo "<p class='error'>$contentError</p>"; } ?> <br>
 
     <label>Slug</label>
@@ -31,6 +31,9 @@ require('style\navigation.php');
 
     <label>Created:</label>
     <?php if (isset($created)) {echo $created;} ?> <br>
+
+    <label>Post image:</label> <br>
+    <input type="file" name="imgUpload"> <br>
     
     <label>Active</label>
     <input type="radio" name="active" value=1 checked>
