@@ -35,7 +35,7 @@ $deletePostStmt->prepare("DELETE FROM posts WHERE id = ?");
 /* Slug duplicate check statement */
 
 $slugDuplicate = $connection->stmt_init();
-$slugDuplicate->prepare("SELECT * FROM posts WHERE slug = ?");
+$slugDuplicate->prepare("SELECT slug FROM posts WHERE slug = ?");
 
 ///* Image upload statement */                                      Under construction...
 //

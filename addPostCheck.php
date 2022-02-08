@@ -19,9 +19,14 @@ else if (strlen($short_description) > 150) {$short_description_error = 'This fie
 
 $slug = htmlspecialchars($_POST['slug']);
 if (strlen($slug) === 0) { $_POST['slug'] = $title; $slug = $title;}
-if (strlen($slug) > 80) {$slugError = 'This field must be under 80 characters!';}
+else if (strlen($slug) > 80) {$slugError = 'This field must be under 80 characters!';}
 $slugDuplicate->bind_param("s", $slug);
-if (!$slugDuplicate->execute()) {$slugError = 'This slug arleady exists';}
+$slugDuplicate->execute();
+$result = $slugDuplicate->get_result();
+
+if ($result->num_rows > 0) {
+    $slugError = 'This slug arleady exists';
+}
 
 
 $created = date('Y-m-d H:m:s', strtotime($_POST['created']));
