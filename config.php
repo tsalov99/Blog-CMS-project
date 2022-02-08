@@ -30,8 +30,8 @@ if (!$connection->query($postsTableQuery)) {
 
 $imagesTableQuery = "CREATE TABLE IF NOT EXISTS `images` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `path` varchar(50) NOT NULL,
-    `parent_post_id` int(11) NOT NULL,
+    `path` varchar(100) NOT NULL,
+    `parent_post_slug` int(11) NOT NULL,
     PRIMARY KEY (`id`))
     ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;";
 

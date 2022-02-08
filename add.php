@@ -33,7 +33,7 @@ require('style\navigation.php');
     <?php if (isset($created)) {echo $created;} ?> <br>
 
     <label>Post image:</label> <br>
-    <input type="file" name="imgUpload"> <br>
+    <input type="file" name="imgUpload[]" multiple> <br>
     
     <label>Active</label>
     <input type="radio" name="active" value=1 checked>

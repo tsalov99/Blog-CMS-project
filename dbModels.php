@@ -5,7 +5,7 @@ require('config.php');
 /* Add post statement */
 
 $addPostStmt = $connection->stmt_init();
-$addPostStmt->prepare("INSERT INTO posts (title, content, short_description, slug, created, imgPath, active) VALUES (?,?,?,?,?,?,?)");
+$addPostStmt->prepare("INSERT INTO posts (title, content, short_description, slug, created, active) VALUES (?,?,?,?,?,?)");
 
 /* Select posts query */
 
@@ -34,10 +34,10 @@ $deletePostStmt->prepare("DELETE FROM posts WHERE id = ?");
 
 /* Slug duplicate check statement */
 
-$slugDuplicate = $connection->stmt_init();
-$slugDuplicate->prepare("SELECT slug FROM posts WHERE slug = ?");
+$slugDuplicateStmt = $connection->stmt_init();
+$slugDuplicateStmt->prepare("SELECT slug FROM posts WHERE slug = ?");
 
-///* Image upload statement */                                      Under construction...
-//
-//$imgUpload = $connection->stmt_init();
-//$imgUpload = $connection->prepare("INSERT INTO images ('path', 'parent_post_id') VALUES (?, ?)");
+/* Image upload statement */
+
+$imgUpload = $connection->stmt_init();
+$imgUpload = $connection->prepare("INSERT INTO images (`path`, parent_post_slug) VALUES (?, ?)");
