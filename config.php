@@ -1,5 +1,5 @@
 <?php
-[$server, $username, $password] = ['localhost', 'root', 'S1L0V']; //set host/ username/ password/ db-name
+[$server, $username, $password] = ['localhost', 'root', '']; //set host/ username/ password/ db-name
 
 $connection = new mysqli($server, $username, $password);
 
