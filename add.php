@@ -22,6 +22,9 @@ require('style\navigation.php');
     <textarea name="content" id="tiny" value="<?php echo $content; ?>"></textarea>
     <?php if (isset($contentError)) { echo "<p class='error'>$contentError</p>"; } ?> <br>
 
+    <label>Content</label>
+    <textarea name="dsad" id="tiny"></textarea><br>
+
     <label>Slug</label>
     <input type="text" name="slug" value="<?php echo $slug; ?>"> <br>
     <?php if (isset($slugError)) {echo "<p class='error'>$slugError</p>";} ?> <br>
