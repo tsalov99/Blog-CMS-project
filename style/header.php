@@ -5,7 +5,8 @@
 <script src="tinymce/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">
 tinymce.init({
-    selector: '#tiny'
+    selector: '#tiny',
+    width: 800
 });
 </script>
 <style>
