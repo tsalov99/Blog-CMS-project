@@ -5,8 +5,16 @@ require('config.php');
 require('dbModels.php');
 require('style\header.php');
 require('style\navigation.php');
-
-$updatePostStmt->bind_param("ssssssii", $_POST['title'], $_POST['short_description'], $_POST['content'], $_POST['slug'], $_POST['created'], $_POST['modified'], $_POST['active'], $id);
+echo $title;
+echo $content;
+echo $short_description;
+echo $slug;
+echo $created;
+echo $modified;
+echo $active;
+$id = $_GET['id'];
+echo $id;
+$updatePostStmt->bind_param("ssssssii", $title, $content, $short_description, $slug, $created, $modified, $active, $id);
 $updatePostStmt->execute();
 
 if ($updatePostStmt) {

@@ -24,8 +24,6 @@ if($result) {
     echo "<p class='h3'>Created at: $singlePost[created]</p>";
     
     echo "<p class='h3'>Last change: $singlePost[modified]</p>";
-    
-    echo "<p class='h3'>Image: $singlePost[imgPath]</p>";
 
     echo "<p class='h3'>Active: $active</p>";
 

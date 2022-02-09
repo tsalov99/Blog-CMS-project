@@ -11,19 +11,19 @@ require('style\navigation.php');
 <form action="addPostCheck.php" method="post" enctype="multipart/form-data">
 <div class="form-group">
     <label>Title</label>
-    <input  type="text" name="title" value="<?php echo $title; ?>">
+    <input  type="text" name="title" value="<?= $title; ?>">
     <?php if (isset($titleError)) { echo "<p class='error'>$titleError</p>"; } ?> <br>
 
     <label>Short description</label>
-    <input type="text" name="short_description" value="<?php echo $short_description; ?>"> <br>
+    <input type="text" name="short_description" value="<?= $short_description; ?>"> <br>
     <?php if(isset($short_description_error)) {echo "<p class='error'>$short_description_error<p>";} ?> <br>
 
     <label>Content</label>
-    <textarea name="content" id="tiny" value="<?php echo $content; ?>"></textarea>
+    <textarea name="content" id="tiny" value="<?= $content; ?>"></textarea>
     <?php if (isset($contentError)) { echo "<p class='error'>$contentError</p>"; } ?> <br>
 
     <label>Slug</label>
-    <input type="text" name="slug" value="<?php echo $slug; ?>"> <br>
+    <input type="text" name="slug" value="<?= $slug; ?>"> <br>
     <?php if (isset($slugError)) {echo "<p class='error'>$slugError</p>";} ?> <br>
 
     <label>Date created</label>

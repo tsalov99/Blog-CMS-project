@@ -23,8 +23,8 @@ if (isset($slug) && !empty($_FILES['imgUpload']['name'][0])) {
             if (move_uploaded_file($tmpName, $uploadPath)) {
                 $succesUploadCounter++;
 
-                $imgUpload->bind_param('ss', $uploadPath, $slug);
-                $imgUpload->execute();
+                $imgUploadStmt->bind_param('ss', $uploadPath, $slug);
+                $imgUploadStmt->execute();
             }
         }
         echo($succesUploadCounter . " of " . $filesCounter . " files was uploaded successfully");

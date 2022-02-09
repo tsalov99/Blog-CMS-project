@@ -39,5 +39,10 @@ $slugDuplicateStmt->prepare("SELECT slug FROM posts WHERE slug = ?");
 
 /* Image upload statement */
 
-$imgUpload = $connection->stmt_init();
-$imgUpload = $connection->prepare("INSERT INTO images (`path`, parent_post_slug) VALUES (?, ?)");
+$imgUploadStmt = $connection->stmt_init();
+$imgUploadStmt->prepare("INSERT INTO images (`path`, parent_post_slug) VALUES (?, ?)");
+
+/* Get path statement */
+
+$getPathStmt = $connection->stmt_init();
+//$getPathStmt->prepare("SELECT FROM images WHERE parent_post_id")
