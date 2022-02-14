@@ -7,7 +7,7 @@ else if (strlen($title) > 80) {$titleError = 'This field must be under 80 charac
 
 
 if (!isset($_POST['content'])) {$content = $result['content'];}
-else {$content = htmlspecialchars($_POST['content']);}
+else {$content = ($_POST['content']);}
 
 if(strlen($content) === 0) {$contentError = 'The field cannot be empty!';}
 

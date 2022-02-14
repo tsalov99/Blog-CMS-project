@@ -4,8 +4,8 @@ if (!isset($short_description)) {$short_description = '';}
 if (!isset($content)) {$content = '';}
 if (!isset($slug) && isset($title)) {$slug = '';}
 if (empty($slug) && !empty($title)) {$slug = $title;}
-require('style\header.php');
-require('style\navigation.php');
+require('style/header.php');
+require('style/navigation.php');
 ?>
 
 <form action="addPostCheck.php" method="post" enctype="multipart/form-data">

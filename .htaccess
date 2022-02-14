@@ -1,0 +1,2 @@
+RewriteEngine on
+    RewriteRule (.*) testIndex.php [L,QSA]

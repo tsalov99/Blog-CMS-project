@@ -1,8 +1,8 @@
 <?php
 require('config.php');
 require('dbModels.php');
-require('style\header.php');
-require('style\navigation.php');
+require('style/header.php');
+require('style/navigation.php');
 
 if(isset($_GET['page'])) {
     $page = $_GET['page'];

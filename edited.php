@@ -3,8 +3,8 @@ if (empty($slug) && !empty($title)) {$slug = $title;}
 print_r($_POST);
 require('config.php');
 require('dbModels.php');
-require('style\header.php');
-require('style\navigation.php');
+require('style/header.php');
+require('style/navigation.php');
 echo $title;
 echo $content;
 echo $short_description;
