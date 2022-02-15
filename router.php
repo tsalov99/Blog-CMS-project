@@ -1,4 +1,8 @@
 <?php
+//echo "<pre>";
+//print_r($_SERVER);
+//echo "</pre>";
+
 class Router
 {
   private $request;
@@ -14,7 +18,6 @@ class Router
 
   function __call($name, $args)
   {
-    print_r($name);
     list($route, $method) = $args;
 
     if(!in_array(strtoupper($name), $this->supportedHttpMethods))
@@ -25,9 +28,12 @@ class Router
     $this->{strtolower($name)}[$this->formatRoute($route)] = $method;
   }
 
+  /**
+   * Removes trailing forward slashes from the right of the route.
+   * @param route (string)
+   */
   private function formatRoute($route)
   {
-      print_r($route);
     $result = rtrim($route, '/');
     if ($result === '')
     {
@@ -36,24 +42,27 @@ class Router
     return $result;
   }
 
-  private function invalidRequest()
+  private function invalidMethodHandler()
   {
     header("{$this->request->serverProtocol} 405 Method Not Allowed");
   }
 
-  private function defaultRequest()
+  private function defaultRequestHandler()
   {
     header("{$this->request->serverProtocol} 404 Not Found");
   }
 
-  function routeResolve()
+  /**
+   * Resolves a route
+   */
+  function resolve()
   {
-      
+    
     $methodDictionary = $this->{strtolower($this->request->requestMethod)};
     $formatedRoute = $this->formatRoute($this->request->requestUri);
-    //print_r($methodDictionary);
+    print_r($methodDictionary);
     echo '<br>';
-    //print_r($formatedRoute);
+    print_r($formatedRoute);
     $method = $methodDictionary[$formatedRoute];
 
     if(is_null($method))
@@ -65,7 +74,7 @@ class Router
     echo call_user_func_array($method, array($this->request));
   }
 
-  function __destruct() 
+  function __destruct()
   {
     $this->resolve();
   }

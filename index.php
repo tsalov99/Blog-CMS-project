@@ -3,6 +3,7 @@ require('config.php');
 require('dbModels.php');
 require('style/header.php');
 require('style/navigation.php');
+require('testRouter.php');
 
 if(isset($_GET['page'])) {
     $page = $_GET['page'];
@@ -10,6 +11,24 @@ if(isset($_GET['page'])) {
     $_GET['page'] = 1;
     $page = 1;
 }
+
+
+/* testing router */
+echo '<h1 style="color:CornflowerBlue">Object router test</h1>';
+$router = new TestRouter;
+
+print_r($router);
+
+
+$router->get('/', function () {});
+
+$router->addNotFoundHandler(function () {
+    echo 'jdoisjfoids';
+});
+
+echo '<h1 style="color:CornflowerBlue">Object router test</h1>';
+/* ----------------------------------------- */
+
 $perPage = 10;
 $start = ($page - 1) * $perPage;
 
