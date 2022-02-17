@@ -20,17 +20,17 @@ $getPostsForPagesStmt->prepare("SELECT * FROM posts LIMIT ?,?");
 /* Get post for edit statement */
 
 $getPostForEditStmt = $connection->stmt_init();
-$getPostForEditStmt->prepare("SELECT * FROM posts WHERE id = ?");
+$getPostForEditStmt->prepare("SELECT * FROM posts WHERE slug = ?");
 
 /* Update edited post statement */
 
 $updatePostStmt = $connection->stmt_init();
-$updatePostStmt->prepare("UPDATE posts SET title = ?, content = ?, short_description = ?, slug = ?, created = ?, modified = ?, active = ? WHERE id = ?");
+$updatePostStmt->prepare("UPDATE posts SET title = ?, content = ?, short_description = ?, slug = ?, created = ?, modified = ?, active = ? WHERE slug = ?");
 
 /* Delete post statement */
 
 $deletePostStmt = $connection->stmt_init();
-$deletePostStmt->prepare("DELETE FROM posts WHERE id = ?");
+$deletePostStmt->prepare("DELETE FROM posts WHERE slug = ?");
 
 /* Slug duplicate check statement */
 

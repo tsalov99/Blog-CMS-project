@@ -2,7 +2,6 @@
 
 if (isset($slug) && !empty($_FILES['imgUpload']['name'][0])) {
         $path = 'files/img/' . $slug . '/';
-        
         if (!file_exists($path)) {
             mkdir($path);
         }

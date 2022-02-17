@@ -8,7 +8,7 @@ require('style/header.php');
 require('style/navigation.php');
 ?>
 
-<form action="addPostCheck.php" method="post" enctype="multipart/form-data">
+<form action="add-post-check" method="post" enctype="multipart/form-data">
 <div class="form-group">
     <label>Title</label>
     <input  type="text" name="title" value="<?= $title; ?>">

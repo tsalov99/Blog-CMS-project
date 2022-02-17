@@ -4,18 +4,18 @@ require('dbModels.php');
 require('style\header.php');
 require('style\navigation.php');
 
-$id = +$_GET['id'];
-$getPostForEditStmt->bind_param("i", $id);
+
+$slug = array_key_first($_GET);
+$getPostForEditStmt->bind_param("s", $slug);
 $getPostForEditStmt->execute();
 $result = mysqli_stmt_get_result($getPostForEditStmt);
 $result = $result->fetch_array();
-
 $created = date('Y-m-d H:m:s', strtotime($result['created']));
 
 echo "<div class='text-left p-5 h6'>";
 ?>
 
-<form action="editPostCheck.php?id=<?= $id ;?>" method="post" enctype="multipart/form-data">
+<form action="edit-post-check?<?php $slug; ?>" method="post" enctype="multipart/form-data">
 
     <label>Title</label>
     <input type="text" name="title" value='<?= ($result['title']); ?>'>

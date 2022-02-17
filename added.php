@@ -5,7 +5,7 @@ require('config.php');
 require('dbModels.php');
 require('style/header.php');
 require('style/navigation.php');
-
+print_r($_POST);
 [$title, $short_description, $content, $slug, $created, $active] = [$_POST['title'], $_POST['short_description'], $_POST['content'], $_POST['slug'], $_POST['created'], $_POST['active']];
 $created = date('Y-m-d H:m:s', strtotime($_POST['created']));
 

@@ -3,7 +3,6 @@ require('config.php');
 require('dbModels.php');
 require('style/header.php');
 require('style/navigation.php');
-require('testRouter.php');
 
 if(isset($_GET['page'])) {
     $page = $_GET['page'];
@@ -13,21 +12,7 @@ if(isset($_GET['page'])) {
 }
 
 
-/* testing router */
-echo '<h1 style="color:CornflowerBlue">Object router test</h1>';
-$router = new TestRouter;
 
-print_r($router);
-
-
-$router->get('/', function () {});
-
-$router->addNotFoundHandler(function () {
-    echo 'jdoisjfoids';
-});
-
-echo '<h1 style="color:CornflowerBlue">Object router test</h1>';
-/* ----------------------------------------- */
 
 $perPage = 10;
 $start = ($page - 1) * $perPage;
@@ -49,12 +34,12 @@ $totalPages = ceil($allPostsNumber / $perPage);
 
 $page !== 1 && $page > 1 ? $prevousPage = $page - 1 : $prevousPage = 1;
 $page < $totalPages ? $nextPage = $page + 1 : $nextPage = $totalPages;
-    include('pagesNavigation.php');    
+    include('pagesNavigation.php');
 if ($allPostsNumber > 0) {
     echo "<table class='table table-striped table-bordered text-center'><thead class='thead-dark'><tr><th>Title</th><th>Created</th><th>Active</th></tr></thead>";
     while ($row = $selectAllPosts->fetch_array()) {
         $row['active'] === '1' ? $active = 'Yes' : $active = 'No';
-        echo "<tr class='text-dark h5'><td class='p-0'><a class='text-dark' style='text-decoration:none; display:blocked;' href='detailView.php?id=$row[id]'><p class='m-0'>$row[title]</p></a></td>";
+        echo "<tr class='text-dark h5'><td class='p-0'><a class='text-dark' style='text-decoration:none; display:blocked;' href='article?$row[slug]'><p class='m-0'>$row[title]</p></a></td>";
         echo "<td>$row[created]</td>";
         echo "<td>$active</td></tr>";
     }

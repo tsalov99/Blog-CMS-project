@@ -3,10 +3,9 @@ require('config.php');
 require('dbModels.php');
 require('style/header.php');
 require('style/navigation.php');
+$slug = array_key_first($_GET);
 
-$id = $_GET['id'];
-
-$deletePostStmt->bind_param("i", $id);
+$deletePostStmt->bind_param("s", $slug);
 $deletePostStmt->execute();
 
 if ($deletePostStmt) {

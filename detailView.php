@@ -2,8 +2,8 @@
 require('config.php');
 require('style/header.php');
 require('style/navigation.php');
-$id = $_GET['id'];
-$getPostView = "SELECT * FROM posts WHERE id = $id";
+$slug = array_key_first($_GET);
+$getPostView = "SELECT * FROM posts WHERE slug = '$slug'";
 $result = mysqli_query($connection, $getPostView);
 if($result) {
     $singlePost = mysqli_fetch_array($result);
@@ -27,8 +27,8 @@ if($result) {
 
     echo "<p class='h3'>Active: $active</p>";
 
-    echo "<a href=edit.php?id=$id><p>Edit post</p></a>";
-    echo "<a href=deleted.php?id=$id><p>Delete post</p></a>";
+    echo "<a href=edit?$slug><p>Edit post</p></a>";
+    echo "<a href=delete-article?$slug><p>Delete post</p></a>";
     echo "</div>";
 } else {
     echo "No record with this ID";

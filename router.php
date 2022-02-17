@@ -1,81 +1,49 @@
 <?php
+
 //echo "<pre>";
 //print_r($_SERVER);
 //echo "</pre>";
+$pathBase = str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__);
 
-class Router
-{
-  private $request;
-  private $supportedHttpMethods = array(
-    "GET",
-    "POST"
-  );
+$request = str_replace($pathBase, '', $_SERVER['REQUEST_URI']);
 
-  function __construct(Prepare $request)
-  {
-   $this->request = $request;
-  }
+$wholePath = $pathBase . $request;
 
-  function __call($name, $args)
-  {
-    list($route, $method) = $args;
 
-    if(!in_array(strtoupper($name), $this->supportedHttpMethods))
-    {
-      $this->invalidMethodHandler();
-    }
+$routes = [];
+$actionOLD = trim($_SERVER['REQUEST_URI'], '/'); // Taking the url action from SERVER variable and trim it - OLD WAY
 
-    $this->{strtolower($name)}[$this->formatRoute($route)] = $method;
-  }
+preg_match_all("/^.+?(?=\?|$)/", $_SERVER['REQUEST_URI'], $wholeActionResult); // TAKING URL BEFORE PARAMETERS and split it by slashes into separated parts and take last - NEW WAY
+$action = explode('/', $wholeActionResult[0][0]);
+$action = end($action);
 
-  /**
-   * Removes trailing forward slashes from the right of the route.
-   * @param route (string)
-   */
-  private function formatRoute($route)
-  {
-    $result = rtrim($route, '/');
-    if ($result === '')
-    {
-      return '/';
-    }
-    return $result;
-  }
 
-  private function invalidMethodHandler()
-  {
-    header("{$this->request->serverProtocol} 405 Method Not Allowed");
-  }
+$params = [];
+/* Check for params */
+$check = preg_match_all("/(?<=\?).+/", $_SERVER['REQUEST_URI'], $paramMatch); // TAKING ALL PARAMETERS in URL after question mark and separated them by "?"
+if (!empty($paramMatch[0])){
+  $paramMatch = explode("?", $paramMatch[0][0]);
+}
+/*  */
 
-  private function defaultRequestHandler()
-  {
-    header("{$this->request->serverProtocol} 404 Not Found");
-  }
 
-  /**
-   * Resolves a route
-   */
-  function resolve()
-  {
-    
-    $methodDictionary = $this->{strtolower($this->request->requestMethod)};
-    $formatedRoute = $this->formatRoute($this->request->requestUri);
-    print_r($methodDictionary);
-    echo '<br>';
-    print_r($formatedRoute);
-    $method = $methodDictionary[$formatedRoute];
+function route($action, $callback) {
 
-    if(is_null($method))
-    {
-      $this->defaultRequestHandler();
-      return;
-    }
+    global $routes;
+    $routes[$action] = $callback;
+}
 
-    echo call_user_func_array($method, array($this->request));
-  }
+function routeWithParameters($action, $callback) {
+    global $routes;
+  
+    $routes[$action] = $callback;
+}
 
-  function __destruct()
-  {
-    $this->resolve();
-  }
+function dispatch($action){
+
+    global $routes;
+    $action = trim($action, '/');
+    $action = explode("/",$action)[0];
+    $callback = $routes[$action];
+    echo call_user_func($callback);
 }
