@@ -12,6 +12,9 @@ $result = mysqli_stmt_get_result($getPostForEditStmt);
 $result = $result->fetch_array();
 $created = date('Y-m-d H:m:s', strtotime($result['created']));
 
+session_start();
+$_SESSION['id'] = $result['id'];
+
 echo "<div class='text-left p-5 h6'>";
 ?>
 

@@ -4,7 +4,7 @@ require('config.php');
 require('dbModels.php');
 require('style/header.php');
 require('style/navigation.php');
-$updatePostStmt->bind_param("ssssssis", $title, $content, $short_description, $slug, $created, $modified, $active, $slug);
+$updatePostStmt->bind_param("ssssssii", $title, $content, $short_description, $slug, $created, $modified, $active, $id);
 $updatePostStmt->execute();
 
 if ($updatePostStmt) {

@@ -1,13 +1,21 @@
 <?php
 require('config.php');
+require('dbModels.php');
 require('style/header.php');
 require('style/navigation.php');
 $slug = array_key_first($_GET);
-$getPostView = "SELECT * FROM posts WHERE slug = '$slug'";
-$result = mysqli_query($connection, $getPostView);
+
+$getPostDetailViewStmt->bind_param("s", $slug);
+$getPostDetailViewStmt->execute();
+
+//8$getPostView = "SELECT * FROM posts WHERE slug = '$slug'";
+$result = mysqli_stmt_get_result($getPostDetailViewStmt);
+$result = $result->fetch_array();
 if($result) {
-    $singlePost = mysqli_fetch_array($result);
+    
+    $singlePost = $result;
     $singlePost['active'] === '1' ? $active = 'Yes' : $active = 'No';
+    print_r($singlePost);
     echo "<div class='text-left p-5 h6'>";
     echo "<p class='h3'>Title:</p>";
     echo "<p>$singlePost[title]</p>";

@@ -14,7 +14,7 @@ route('edit-article', function() {
     require('edit.php');
 });
 
-route('articles', function() {
+route('article-list', function() {
     require('index.php');
 });
 

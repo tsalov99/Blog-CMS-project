@@ -17,6 +17,11 @@ $selectAllPostsQuery = "SELECT * FROM posts";
 $getPostsForPagesStmt = $connection->stmt_init();
 $getPostsForPagesStmt->prepare("SELECT * FROM posts LIMIT ?,?");
 
+/* Get post for detail view */
+
+$getPostDetailViewStmt = $connection->stmt_init();
+$getPostDetailViewStmt->prepare("SELECT * FROM posts WHERE slug = ?");
+
 /* Get post for edit statement */
 
 $getPostForEditStmt = $connection->stmt_init();
@@ -25,7 +30,7 @@ $getPostForEditStmt->prepare("SELECT * FROM posts WHERE slug = ?");
 /* Update edited post statement */
 
 $updatePostStmt = $connection->stmt_init();
-$updatePostStmt->prepare("UPDATE posts SET title = ?, content = ?, short_description = ?, slug = ?, created = ?, modified = ?, active = ? WHERE slug = ?");
+$updatePostStmt->prepare("UPDATE posts SET title = ?, content = ?, short_description = ?, slug = ?, created = ?, modified = ?, active = ? WHERE id = ?");
 
 /* Delete post statement */
 
