@@ -14,7 +14,7 @@ $result = $result->fetch_array();
 if($result) {
     
     $singlePost = $result;
-    $singlePost['active'] === '1' ? $active = 'Yes' : $active = 'No';
+    $singlePost['active'] === 1 ? $active = 'Yes' : $active = 'No';
     echo "<div class='text-left p-5 h6'>";
     echo "<p class='h3'>Title:</p>";
     echo "<p>$singlePost[title]</p>";
