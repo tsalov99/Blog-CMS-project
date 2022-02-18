@@ -3,17 +3,8 @@
 //echo "<pre>";
 //print_r($_SERVER);
 //echo "</pre>";
-$pathBase = str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__);
 
-$request = str_replace($pathBase, '', $_SERVER['REQUEST_URI']);
-
-$wholePath = $pathBase . $request;
-
-
-$routes = [];
-$actionOLD = trim($_SERVER['REQUEST_URI'], '/'); // Taking the url action from SERVER variable and trim it - OLD WAY
-
-preg_match_all("/^.+?(?=\?|$)/", $_SERVER['REQUEST_URI'], $wholeActionResult); // TAKING URL BEFORE PARAMETERS and split it by slashes into separated parts and take last - NEW WAY
+preg_match_all("/^.+?(?=\?|$)/", $_SERVER['REQUEST_URI'], $wholeActionResult); // TAKING URL BEFORE PARAMETERS and split it by slashes into separated parts and take last
 $action = explode('/', $wholeActionResult[0][0]);
 $action = end($action);
 
@@ -35,7 +26,6 @@ function route($action, $callback) {
 
 function routeWithParameters($action, $callback) {
     global $routes;
-  
     $routes[$action] = $callback;
 }
 
