@@ -6,6 +6,16 @@ require('style\navigation.php');
 
 
 $slug = array_key_first($_GET);
+
+/* Check if slug exists */
+
+$slugDuplicateStmt->bind_param('s', $slug);
+$slugDuplicateStmt->execute();
+$slugExists = $slugDuplicateStmt->get_result();
+if ($slugExists->num_rows === 0) {
+    echo "Missing";
+    die;
+}
 $getPostForEditStmt->bind_param("s", $slug);
 $getPostForEditStmt->execute();
 $result = mysqli_stmt_get_result($getPostForEditStmt);

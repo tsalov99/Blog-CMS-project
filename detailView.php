@@ -15,7 +15,6 @@ if($result) {
     
     $singlePost = $result;
     $singlePost['active'] === '1' ? $active = 'Yes' : $active = 'No';
-    print_r($singlePost);
     echo "<div class='text-left p-5 h6'>";
     echo "<p class='h3'>Title:</p>";
     echo "<p>$singlePost[title]</p>";
@@ -39,5 +38,7 @@ if($result) {
     echo "<a href=delete-article?$slug><p>Delete post</p></a>";
     echo "</div>";
 } else {
-    echo "No record with this ID";
+    echo "<div class='text-left p-5 h6'>";
+    echo "<p class='h3'>No record with this ID</p>";
+    echo "</div>";
 }
