@@ -1,4 +1,6 @@
 <?php
+require('dbModels.php');
+
 if (!isset($_POST['title'])) {$title = $result['title'];}
 else {$title = htmlspecialchars($_POST['title']);}
 
@@ -19,6 +21,13 @@ else if (strlen($short_description) > 150) {$short_description_error = 'This fie
 if (!isset($_POST['slug'])) {$slug = $result['slug'];}
 else {$slug = htmlspecialchars($_POST['slug']);}
 
+$slugDuplicateStmt->bind_param("s", $slug);
+$slugDuplicateStmt->execute();
+$result = $slugDuplicateStmt->get_result();
+
+if ($result->num_rows > 0) {
+    $slugError = 'This slug arleady exists';
+}
 if (strlen($slug) === 0) { $slug = $title;}
 else if (strlen($slug) > 80) {$slugError = 'This field must be under 80 characters!';}
 session_start();
